@@ -99,37 +99,37 @@ def index():
 
 
 @hist.route('/node.php')
-def mapki_node_history():
+def mapki_node():
     obj_id = request.args.get('id', type=int)
 
     if obj_id:
-        return redirect(url_for('node_history', id=obj_id))
+        return redirect(url_for('history.node', id=obj_id))
 
     return redirect(url_for('index'))
 
 
 @hist.route('/way.php')
-def mapki_way_history():
+def mapki_way():
     obj_id = request.args.get('id', type=int)
 
     if obj_id:
-        return redirect(url_for('way_history', id=obj_id))
+        return redirect(url_for('history.way', id=obj_id))
 
     return redirect(url_for('index'))
 
 
 @hist.route('/relation.php')
-def mapki_relation_history():
+def mapki_relation():
     obj_id = request.args.get('id', type=int)
 
     if obj_id:
-        return redirect(url_for('relation_history', id=obj_id))
+        return redirect(url_for('history.relation', id=obj_id))
 
     return redirect(url_for('index'))
 
 
 @hist.route('/node/<int:id>')
-def node_history(id):
+def node(id):
     versions = fetch_node_history(id)
 
     prop_lines = [
@@ -154,7 +154,7 @@ def node_history(id):
 
 
 @hist.route('/way/<int:id>')
-def way_history(id):
+def way(id):
     versions = fetch_way_history(id)
 
     prop_lines = [
@@ -189,7 +189,7 @@ def way_history(id):
 
 
 @hist.route('/relation/<int:id>')
-def relation_history(id):
+def relation(id):
     versions = fetch_relation_history(id)
 
     prop_lines = [
