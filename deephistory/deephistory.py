@@ -1,10 +1,8 @@
-import arrow
-import json
 import requests
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Blueprint, Flask, redirect, render_template, request, url_for
 from itertools import tee
-from xml.etree import ElementTree
 
+hist = Blueprint('history', __name__, template_folder='templates')
 app = Flask(__name__)
 API_URL = 'https://api.openstreetmap.org/api/0.6'
 
@@ -13,12 +11,14 @@ class ElementDoesntExistException(Exception):
     def __init__(self, response):
         self.response = response
 
-@app.errorhandler(ElementDoesntExistException)
+
+@hist.errorhandler(ElementDoesntExistException)
 def element_missing_exception_handler(exc):
     return render_template(
         'missing_element.html',
         exc=exc,
     )
+
 
 def fetch_and_parse_json(url_suffix):
     response = requests.get(API_URL + url_suffix)
@@ -29,20 +29,24 @@ def fetch_and_parse_json(url_suffix):
         response.raise_for_status()
 
     data = response.json()
-    
+
     return data.get('elements')
+
 
 def fetch_node_history(id):
     data = fetch_and_parse_json('/node/%d/history.json' % id)
     return data
 
+
 def fetch_way_history(id):
     data = fetch_and_parse_json('/way/%d/history.json' % id)
     return data
 
+
 def fetch_relation_history(id):
     data = fetch_and_parse_json('/relation/%d/history.json' % id)
     return data
+
 
 def compute_all_tag_keys(versions):
     all_keys = []
@@ -52,10 +56,12 @@ def compute_all_tag_keys(versions):
                 all_keys.append(t)
     return all_keys
 
+
 def pairwise(iterable):
     a, b = tee(iterable)
     next(b, None)
     return zip(a, b)
+
 
 def change_row(versions, attr_getter, url_template=None):
     row = []
@@ -86,38 +92,43 @@ def change_row(versions, attr_getter, url_template=None):
 
     return row
 
-@app.route('/')
+
+@hist.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/history/node.php')
+
+@hist.route('/node.php')
 def mapki_node_history():
     obj_id = request.args.get('id', type=int)
 
     if obj_id:
         return redirect(url_for('node_history', id=obj_id))
-    
+
     return redirect(url_for('index'))
 
-@app.route('/history/way.php')
+
+@hist.route('/way.php')
 def mapki_way_history():
     obj_id = request.args.get('id', type=int)
 
     if obj_id:
         return redirect(url_for('way_history', id=obj_id))
-    
+
     return redirect(url_for('index'))
 
-@app.route('/history/relation.php')
+
+@hist.route('/relation.php')
 def mapki_relation_history():
     obj_id = request.args.get('id', type=int)
 
     if obj_id:
         return redirect(url_for('relation_history', id=obj_id))
-    
+
     return redirect(url_for('index'))
 
-@app.route('/node/<int:id>')
+
+@hist.route('/node/<int:id>')
 def node_history(id):
     versions = fetch_node_history(id)
 
@@ -140,7 +151,8 @@ def node_history(id):
         tag_lines=tag_lines,
     )
 
-@app.route('/way/<int:id>')
+
+@hist.route('/way/<int:id>')
 def way_history(id):
     versions = fetch_way_history(id)
 
@@ -173,7 +185,8 @@ def way_history(id):
         node_lines=node_lines,
     )
 
-@app.route('/relation/<int:id>')
+
+@hist.route('/relation/<int:id>')
 def relation_history(id):
     versions = fetch_relation_history(id)
 
@@ -205,3 +218,6 @@ def relation_history(id):
         tag_lines=tag_lines,
         member_lines=member_lines,
     )
+
+
+app.register_blueprint(hist, url_prefix='/history')
