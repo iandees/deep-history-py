@@ -1,0 +1,74 @@
+{% extends '_template.html' %}
+
+{% block body %}
+{{ super() }}
+<h3>Relation ID {{ versions[0].id }}</h3>
+<hr/>
+
+<table>
+    <tr>
+        <td>&nbsp;</td>
+    {%- for v in versions %}
+        <td>{{ v.version }}</td>
+    {%- endfor %}
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    {%- for v in versions %}
+        <td>{{ v.timestamp }}</td>
+    {%- endfor %}
+    </tr>
+
+    <tr>
+        <td class="header" colspan="{{ versions|length + 1 }}">
+            <strong>Primitive Info</strong>
+        </td>
+    </tr>
+    {% for name, line_info in prop_lines %}
+    <tr>
+        <td>{{ name }}</td>
+        {% for col_info in line_info %}
+        <td class="{{ col_info.clz }}">
+            {%- if col_info.url -%}
+            <a href="{{ col_info.url }}">{{ col_info.val }}</a>
+            {%- else -%}
+            {{ col_info.val }}
+            {%- endif -%}
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+    <tr>
+        <td colspan="{{ versions|length + 1}}">
+            <strong>Tags</strong>
+        </td>
+    </tr>
+    {% for name, line_info in tag_lines %}
+    <tr>
+        <td><code>{{ name }}</code></td>
+        {% for col_info in line_info %}
+        <td class="{{ col_info.clz }}">{{ col_info.val }}</td>
+        {% endfor %}
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="{{ versions|length + 1 }}"><em>No tags</em></td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+        <td colspan="{{ versions|length + 1}}">
+            <strong>Members</strong>
+        </td>
+    </tr>
+    {% for name, line_info in member_lines %}
+    <tr>
+        <td><code>{{ name }}</code></td>
+        {% for col_info in line_info %}
+        <td class="{{ col_info.clz }}">&nbsp;</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

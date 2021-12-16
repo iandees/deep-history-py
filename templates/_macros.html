@@ -1,0 +1,36 @@
+
+{% macro property_diff_line(versions, row_name, property_name) -%}
+<tr>
+    <td>{{ row_name }}</td>
+    {% for v in versions -%}
+    <td class="{{ class_name(prev, cur) }}">{{ cur }}</td>
+    {%- endfor %}
+</tr>
+{%- endmacro %}
+
+{% macro tag_diff_line(versions, tag) -%}
+<tr>
+    <td><code>{{ tag }}</code></td>
+    {% for v in versions -%}
+    <td><code>{{ v.tags.get(tag) }}</code></td>
+    {%- endfor %}
+</tr>
+{%- endmacro %}
+
+{% macro tag_member_line(versions, member) -%}
+<tr>
+    <td>{{ member.type[0] }}{{ member.ref }}</td>
+    {% for v in versions -%}
+    <td>{{ v.members }}</td>
+    {%- endfor %}
+</tr>
+{%- endmacro %}
+
+{% macro way_node_diff_line(versions, nd) -%}
+<tr>
+    <td>{{ nd }}</td>
+    {% for v in versions -%}
+    <td>{{ nd in v.nodes }}</td>
+    {%- endfor %}
+</tr>
+{%- endmacro %}
