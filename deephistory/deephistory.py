@@ -134,6 +134,7 @@ def node_history(id):
 
     prop_lines = [
         ('User', change_row(versions, lambda v: v['user'], 'https://osm.org/user/{val}')),
+        ('Visible', change_row(versions, lambda v: v.get('visible', True))),
         ('Changeset', change_row(versions, lambda v: v['changeset'], 'https://osm.org/changeset/{val}')),
         ('Lat', change_row(versions, lambda v: v.get('lat'))),
         ('Lon', change_row(versions, lambda v: v.get('lon'))),
@@ -158,6 +159,7 @@ def way_history(id):
 
     prop_lines = [
         ('User', change_row(versions, lambda v: v['user'], 'https://osm.org/user/{val}')),
+        ('Visible', change_row(versions, lambda v: v.get('visible', True))),
         ('Changeset', change_row(versions, lambda v: v['changeset'], 'https://osm.org/changeset/{val}')),
     ]
 
@@ -192,6 +194,7 @@ def relation_history(id):
 
     prop_lines = [
         ('User', change_row(versions, lambda v: v['user'], 'https://osm.org/user/{val}')),
+        ('Visible', change_row(versions, lambda v: v.get('visible', True))),
         ('Changeset', change_row(versions, lambda v: v['changeset'], 'https://osm.org/changeset/{val}')),
     ]
 
