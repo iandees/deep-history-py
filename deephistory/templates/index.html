@@ -1,5 +1,50 @@
 {% extends '_template.html' %}
 
 {% block body %}
-<h1>Hello World</h1>
+{{ super() }}
+<h3>Deep History</h3>
+<hr/>
+
+<table>
+    <tr>
+        <form action="node.php">
+            <td align="right">
+                <label for="node">Node ID:</label>
+            </td>
+            <td>
+                <input type="text" size="16" id="node" name="id">
+            </td>
+            <td>
+                <input type="submit" value="Get History">
+            </td>
+        </form>
+    </tr>
+
+    <tr>
+        <form action="way.php">
+            <td align="right">
+                <label for="way">Way ID:</label>
+            </td>
+            <td>
+                <input type="text" size="16" id="way" name="id">
+            </td>
+            <td>
+                <input type="submit" value="Get History">
+            </td>
+            </form>
+    </tr>
+    <tr>
+        <form action="relation.php">
+            <td align="right">
+                <label for="relation">Relation ID:</label>
+            </td>
+            <td>
+                <input type="text" size="16" id="relation" name="id">
+            </td>
+            <td>
+                <input type="submit" value="Get History">
+            </td>
+        </form>
+    </tr>
+</table>
 {% endblock %}
