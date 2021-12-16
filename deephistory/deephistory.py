@@ -105,7 +105,7 @@ def mapki_node():
     if obj_id:
         return redirect(url_for('history.node', id=obj_id))
 
-    return redirect(url_for('index'))
+    return redirect(url_for('history.index'))
 
 
 @hist.route('/way.php')
@@ -115,7 +115,7 @@ def mapki_way():
     if obj_id:
         return redirect(url_for('history.way', id=obj_id))
 
-    return redirect(url_for('index'))
+    return redirect(url_for('history.index'))
 
 
 @hist.route('/relation.php')
@@ -125,7 +125,7 @@ def mapki_relation():
     if obj_id:
         return redirect(url_for('history.relation', id=obj_id))
 
-    return redirect(url_for('index'))
+    return redirect(url_for('history.index'))
 
 
 @hist.route('/node/<int:id>')
