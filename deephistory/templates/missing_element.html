@@ -5,7 +5,7 @@
 <h3>Object Missing</h3>
 <hr/>
 
-<p>The OSM API server says that object doesn't exist. Perhaps you could <a href="{{ url_for('index') }}">go look for another object</a>?</p>
+<p>The OSM API server says that object doesn't exist. Perhaps you could <a href="{{ url_for('history.index') }}">go look for another object</a>?</p>
 
 <p><code>HTTP {{ exc.response.status_code }} - <a href="{{ exc.response.url }}">{{ exc.response.url }}</a></code></p>
 {% endblock %}
