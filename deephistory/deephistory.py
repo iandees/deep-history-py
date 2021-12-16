@@ -129,7 +129,7 @@ def node_history(id):
     ]
 
     tag_lines = [
-        (t, change_row(versions, lambda v: v['tags'].get(t)))
+        (t, change_row(versions, lambda v: v.get('tags', {}).get(t)))
         for t in compute_all_tag_keys(versions)
     ]
 
@@ -150,7 +150,7 @@ def way_history(id):
     ]
 
     tag_lines = [
-        (t, change_row(versions, lambda v: v['tags'].get(t)))
+        (t, change_row(versions, lambda v: v.get('tags', {}).get(t)))
         for t in compute_all_tag_keys(versions)
     ]
 
@@ -183,7 +183,7 @@ def relation_history(id):
     ]
 
     tag_lines = [
-        (t, change_row(versions, lambda v: v['tags'].get(t)))
+        (t, change_row(versions, lambda v: v.get('tags', {}).get(t)))
         for t in compute_all_tag_keys(versions)
     ]
 
@@ -194,7 +194,7 @@ def relation_history(id):
                 all_members.append(m)
 
     member_lines = [
-        (n, change_row(versions, lambda v: n in v['members']))
+        (n, change_row(versions, lambda v: n in v.get('members', [])))
         for n in all_members
     ]
 
