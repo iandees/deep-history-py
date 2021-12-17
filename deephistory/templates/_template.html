@@ -11,11 +11,17 @@
             border-collapse: separate;
             border-spacing: 2px;
             table-layout: fixed;
-            border: 0px;
+            border: 0;
         }
         tr:hover td {
             background-blend-mode: darken;
             background: #ffff99;
+        }
+        table td {
+            padding: 3px;
+        }
+        table th {
+            padding: 3px;
         }
         table thead th {
             position: sticky;
@@ -42,6 +48,14 @@
             background: #ccc;
             z-index: 1;
             font-weight: initial;
+        }
+        .primitive-icon {
+            vertical-align: baseline;
+            width: 16px;
+        }
+        h3 .primitive-icon {
+            vertical-align: bottom;
+            width: 32px;
         }
         .header {
           background: #aaa;

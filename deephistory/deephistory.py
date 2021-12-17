@@ -2,7 +2,7 @@ import requests
 from flask import Blueprint, Flask, redirect, render_template, request, url_for
 from itertools import tee
 
-hist = Blueprint('history', __name__, template_folder='templates')
+hist = Blueprint('history', __name__, template_folder='templates', static_folder='static')
 app = Flask(__name__)
 API_URL = 'https://api.openstreetmap.org/api/0.6'
 
@@ -205,7 +205,7 @@ def relation(id):
 
     all_members = []
     for v in versions:
-        for m in v['members']:
+        for m in v.get('members', []):
             if m not in all_members:
                 all_members.append(m)
 

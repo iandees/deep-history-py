@@ -2,7 +2,7 @@
 
 {% block body %}
 {{ super() }}
-<h3>Relation ID {{ versions[0].id }}</h3>
+<h3>History of Relation <img class="primitive-icon" src="{{ url_for('static', filename='relation.svg') }}"/>&nbsp;{{ versions[0].id }}</h3>
 <hr/>
 
 <table>
@@ -49,14 +49,20 @@
         </tr>
         {% for name, line_info in tag_lines %}
         <tr>
-            <th><code>{{ name }}</code></th>
+            <th>
+                <img class="primitive-icon" src="{{ url_for('static', filename='tag.svg') }}"/>
+                <code>{{ name }}</code>
+            </th>
             {% for col_info in line_info %}
             <td class="{{ col_info.clz }}">{{ col_info.val }}</td>
             {% endfor %}
         </tr>
         {% else %}
         <tr>
-            <td colspan="{{ versions|length + 1 }}"><em>No tags</em></td>
+            <td colspan="{{ versions|length + 1 }}">
+                <img class="primitive-icon" src="{{ url_for('static', filename='tag.svg') }}"/>
+                <em>No tags</em>
+            </td>
         </tr>
         {% endfor %}
 
@@ -67,7 +73,10 @@
         </tr>
         {% for name, line_info in member_lines %}
         <tr>
-            <th><code>{{ name }}</code></th>
+            <th>
+                <img class="primitive-icon" src="{{ url_for('static', filename=name['type'] + '.svg') }}"/>
+                <code>{{ name['ref'] }} - {{ name['role'] }}</code>
+            </th>
             {% for col_info in line_info %}
             <td class="{{ col_info.clz }}">&nbsp;</td>
             {% endfor %}
