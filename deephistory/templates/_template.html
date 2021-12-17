@@ -1,16 +1,47 @@
 {% import '_macros.html' as line_macros %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>OSM Deep History</title>
     <style type="text/css">
         table {
-          border: 0px;
+            white-space: nowrap;
+            margin: 0;
+            font-weight: normal;
+            border-collapse: separate;
+            border-spacing: 2px;
+            table-layout: fixed;
+            border: 0px;
         }
-        td {
-          border: 0px;
-          background-color: #ccc;
-          color: #000;
+        tr:hover td {
+            background-blend-mode: darken;
+            background: #ffff99;
+        }
+        table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: #ccc;
+            font-weight: initial;
+        }
+        table td {
+            background: #ccc;
+        }
+
+        table tbody th {
+            text-align: left;
+        }
+        table thead th:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 2;
+        }
+        table tbody th {
+            position: sticky;
+            left: 0;
+            background: #ccc;
+            z-index: 1;
+            font-weight: initial;
         }
         .header {
           background: #aaa;
