@@ -170,12 +170,12 @@ def way(id):
 
     all_nodes = []
     for v in versions:
-        for n in v['nodes']:
+        for n in v.get('nodes', []):
             if n not in all_nodes:
                 all_nodes.append(n)
 
     node_lines = [
-        (n, change_row(versions, lambda v: n in v['nodes']))
+        (n, change_row(versions, lambda v: n in v.get('nodes', [])))
         for n in all_nodes
     ]
 
