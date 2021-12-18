@@ -67,7 +67,7 @@
         {% endfor %}
 
         <tr>
-            <td colspan="{{ versions|length + 1}}">
+            <td class="header" colspan="{{ versions|length + 1}}">
                 <strong>Nodes</strong>
             </td>
         </tr>
@@ -80,6 +80,13 @@
             {% for col_info in line_info %}
             <td class="{{ col_info.clz }}">&nbsp;</td>
             {% endfor %}
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="{{ versions|length + 1 }}">
+                <img class="primitive-icon" src="{{ url_for('static', filename='member.svg') }}"/>
+                <em>No nodes</em>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
