@@ -33,9 +33,9 @@
             {% for col_info in line_info %}
             <td class="{{ col_info.clz }}">
                 {%- if col_info.url -%}
-                <a href="{{ col_info.url }}">{{ col_info.val }}</a>
+                <a href="{{ col_info.url }}">{{ col_info.val | truncate }}</a>
                 {%- else -%}
-                {{ col_info.val }}
+                {{ col_info.val | truncate }}
                 {%- endif -%}
             </td>
             {% endfor %}
@@ -54,7 +54,7 @@
                 <code>{{ name }}</code>
             </th>
             {% for col_info in line_info %}
-            <td class="{{ col_info.clz }}">{{ col_info.val }}</td>
+            <td class="{{ col_info.clz }}">{{ col_info.val | truncate }}</td>
             {% endfor %}
         </tr>
         {% else %}

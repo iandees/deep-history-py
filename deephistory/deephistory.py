@@ -1,6 +1,7 @@
 import requests
 from flask import Blueprint, Flask, redirect, render_template, request, url_for
 from itertools import tee
+from markupsafe import Markup, escape
 
 hist = Blueprint('history', __name__, template_folder='templates', static_folder='static')
 app = Flask(__name__)
@@ -10,6 +11,19 @@ API_URL = 'https://api.openstreetmap.org/api/0.6'
 class ElementDoesntExistException(Exception):
     def __init__(self, response):
         self.response = response
+
+
+@app.template_filter('truncate')
+def truncate_filter(s):
+    if not isinstance(s, str):
+        return s
+
+    max_length = app.config.get('MAX_COLUMN_LENGTH') or 20
+
+    if len(s) > max_length:
+        return Markup("%s<abbr title='%s'>…</abbr>" % (escape(s[:max_length]), escape(s)))
+
+    return s
 
 
 @hist.errorhandler(ElementDoesntExistException)
