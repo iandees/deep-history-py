@@ -188,9 +188,17 @@ def way(id):
             if n not in all_nodes:
                 all_nodes.append(n)
 
+    def node_member_changer(v, i, n):
+        nds = v.get('nodes', [])
+        try:
+            found = nds.index(n)
+            return found
+        except ValueError:
+            return None
+
     node_lines = [
-        (n, change_row(versions, lambda v: n in v.get('nodes', [])))
-        for n in all_nodes
+        (n, change_row(versions, lambda v: node_member_changer(v, i, n)))
+        for i, n in enumerate(all_nodes)
     ]
 
     return render_template(
