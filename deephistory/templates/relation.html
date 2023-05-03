@@ -2,7 +2,7 @@
 
 {% block body %}
 {{ super() }}
-<h3>History of Relation <img class="primitive-icon" src="{{ url_for('static', filename='relation.svg') }}"/>&nbsp;{{ versions[0].id }}</h3>
+<h3>History of Relation <img class="primitive-icon" src="{{ url_for('static', filename='relation.svg') }}"/>&nbsp;<a href="https://openstreetmap.org/relation/{{ versions[0].id }}">{{ versions[0].id }}</a></h3>
 <hr/>
 
 <table>
