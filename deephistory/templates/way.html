@@ -51,7 +51,7 @@
         <tr>
             <th>
                 <img class="primitive-icon" src="{{ url_for('static', filename='tag.svg') }}"/>&nbsp;
-                <code>{{ name }}</code>
+                <code><a href="https://taginfo.openstreetmap.org/keys/{{ name|urlencode }}#overview">{{ name }}</a></code>
             </th>
             {% for col_info in line_info %}
             <td class="{{ col_info.clz }}">{{ col_info.val | truncate }}</td>
