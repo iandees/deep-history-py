@@ -8,9 +8,9 @@
 <table>
     <thead>
         <tr>
-            <th>&nbsp;</th>
+            <th><a href="#version-{{ versions[-1].version }}">Go to Recent &rightarrow;</a></th>
         {%- for v in versions %}
-            <th>{{ v.version }}</th>
+            <th id="version-{{ v.version }}"><a href="#version-{{ v.version }}">{{ v.version }}</a></th>
         {%- endfor %}
         </tr>
         <tr>
