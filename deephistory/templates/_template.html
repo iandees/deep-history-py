@@ -1,9 +1,8 @@
 {% import '_macros.html' as line_macros %}
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>OSM Deep History</title>
-    <style type="text/css">
+    <style>
         table {
             white-space: nowrap;
             margin: 0;
@@ -84,6 +83,22 @@
           font-size: smaller;
         }
     </style>
+    <script>
+        // Scroll to highlight a version column in the table
+        function scrollToId(id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({behavior: "smooth", block: "center"});
+            }
+        }
+
+        // If the page loads with a URL that has a hash that begins with 'version', scroll to that version
+        window.onload = function() {
+            if (window.location.hash.startsWith('#version')) {
+                scrollToId(window.location.hash.substring(1));
+            }
+        };
+    </script>
 </head>
 <body>
     {% block body %}{% endblock %}
