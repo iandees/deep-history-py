@@ -6,7 +6,4 @@ name = "pypi"
 [packages]
 requests = "*"
 flask = "*"
-arrow = "*"
 gunicorn = "*"
-
-[dev-packages]
